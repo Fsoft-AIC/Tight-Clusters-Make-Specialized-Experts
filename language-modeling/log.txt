@@ -1,0 +1,264 @@
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': False, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+2024-09-16 15:53:56.370721
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': False, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+2024-09-16 15:57:18.797166
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': False, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+2024-09-16 16:15:57.480840
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': False, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+2024-09-16 16:17:21.562416
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': False, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+2024-09-16 16:19:24.909035
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': False, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+2024-09-16 16:19:24.942028
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': False, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': False, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+2024-09-16 16:19:24.951607
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+2024-09-16 16:19:24.953489
+=================== EPOCHS 0 ======================
+Epochs: 0 | loss_train: 2.809 ~ 4.052 BPC | loss_val: 2.104 ~ 3.035 BPC | elapsed: 785.1
+=================== EPOCHS 1 ======================
+Epochs: 1 | loss_train: 1.718 ~ 2.478 BPC | loss_val: 1.414 ~ 2.039 BPC | elapsed: 773.0
+=================== EPOCHS 2 ======================
+Epochs: 2 | loss_train: 1.249 ~ 1.802 BPC | loss_val: 1.123 ~ 1.621 BPC | elapsed: 770.7
+=================== EPOCHS 3 ======================
+Epochs: 3 | loss_train: 1.099 ~ 1.585 BPC | loss_val: 1.048 ~ 1.512 BPC | elapsed: 769.7
+=================== EPOCHS 4 ======================
+Epochs: 4 | loss_train: 1.033 ~ 1.491 BPC | loss_val: 0.998 ~ 1.439 BPC | elapsed: 773.5
+=================== EPOCHS 5 ======================
+Epochs: 5 | loss_train: 1.002 ~ 1.446 BPC | loss_val: 0.976 ~ 1.408 BPC | elapsed: 770.7
+=================== EPOCHS 6 ======================
+Epochs: 6 | loss_train: 0.978 ~ 1.411 BPC | loss_val: 0.945 ~ 1.364 BPC | elapsed: 773.2
+=================== EPOCHS 7 ======================
+Epochs: 7 | loss_train: 0.950 ~ 1.370 BPC | loss_val: 0.937 ~ 1.351 BPC | elapsed: 774.0
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': True, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': True, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': True, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': True, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+2024-09-16 19:49:27.740084
+2024-09-16 19:49:27.740085
+2024-09-16 19:49:27.741586
+2024-09-16 19:49:27.742184
+=================== EPOCHS 7 ======================
+Epochs: 7 | loss_train: 0.950 ~ 1.371 BPC | loss_val: 0.931 ~ 1.343 BPC | elapsed: 1170.3
+=================== EPOCHS 8 ======================
+Epochs: 8 | loss_train: 0.932 ~ 1.345 BPC | loss_val: 0.924 ~ 1.332 BPC | elapsed: 1088.7
+=================== EPOCHS 9 ======================
+Epochs: 9 | loss_train: 0.926 ~ 1.336 BPC | loss_val: 0.905 ~ 1.306 BPC | elapsed: 2026.6
+=================== EPOCHS 10 ======================
+Epochs: 10 | loss_train: 0.910 ~ 1.313 BPC | loss_val: 0.899 ~ 1.297 BPC | elapsed: 2113.1
+=================== EPOCHS 11 ======================
+Epochs: 11 | loss_train: 1.056 ~ 1.523 BPC | loss_val: 0.907 ~ 1.308 BPC | elapsed: 2127.6
+=================== EPOCHS 12 ======================
+Epochs: 12 | loss_train: 0.909 ~ 1.311 BPC | loss_val: 0.892 ~ 1.287 BPC | elapsed: 2164.9
+=================== EPOCHS 13 ======================
+Epochs: 13 | loss_train: 0.899 ~ 1.297 BPC | loss_val: 0.881 ~ 1.271 BPC | elapsed: 2169.2
+=================== EPOCHS 14 ======================
+Epochs: 14 | loss_train: 0.889 ~ 1.282 BPC | loss_val: 0.881 ~ 1.271 BPC | elapsed: 2184.1
+=================== EPOCHS 15 ======================
+Epochs: 15 | loss_train: 0.874 ~ 1.261 BPC | loss_val: 0.870 ~ 1.256 BPC | elapsed: 2351.5
+=================== EPOCHS 16 ======================
+Epochs: 16 | loss_train: 0.879 ~ 1.268 BPC | loss_val: 0.870 ~ 1.255 BPC | elapsed: 1852.3
+=================== EPOCHS 17 ======================
+Epochs: 17 | loss_train: 0.875 ~ 1.263 BPC | loss_val: 1.851 ~ 2.670 BPC | elapsed: 1198.9
+=================== EPOCHS 18 ======================
+Epochs: 18 | loss_train: 3.489 ~ 5.033 BPC | loss_val: 3.520 ~ 5.078 BPC | elapsed: 1091.3
+=================== EPOCHS 19 ======================
+Epochs: 19 | loss_train: 3.521 ~ 5.080 BPC | loss_val: 3.511 ~ 5.066 BPC | elapsed: 1086.7
+=================== EPOCHS 20 ======================
+Epochs: 20 | loss_train: 3.509 ~ 5.063 BPC | loss_val: 3.515 ~ 5.072 BPC | elapsed: 1115.2
+=================== EPOCHS 21 ======================
+Epochs: 21 | loss_train: 3.528 ~ 5.090 BPC | loss_val: 3.510 ~ 5.064 BPC | elapsed: 1073.1
+=================== EPOCHS 22 ======================
+Epochs: 22 | loss_train: 3.529 ~ 5.091 BPC | loss_val: 3.518 ~ 5.076 BPC | elapsed: 1062.6
+=================== EPOCHS 23 ======================
+Epochs: 23 | loss_train: 3.513 ~ 5.068 BPC | loss_val: 3.511 ~ 5.065 BPC | elapsed: 1062.5
+=================== EPOCHS 24 ======================
+Epochs: 24 | loss_train: 3.515 ~ 5.071 BPC | loss_val: 3.518 ~ 5.075 BPC | elapsed: 1059.1
+=================== EPOCHS 25 ======================
+Epochs: 25 | loss_train: 3.531 ~ 5.094 BPC | loss_val: 3.513 ~ 5.068 BPC | elapsed: 1047.5
+=================== EPOCHS 26 ======================
+Epochs: 26 | loss_train: 3.523 ~ 5.083 BPC | loss_val: 3.521 ~ 5.079 BPC | elapsed: 973.7
+=================== EPOCHS 27 ======================
+Epochs: 27 | loss_train: 3.507 ~ 5.060 BPC | loss_val: 3.508 ~ 5.060 BPC | elapsed: 1185.0
+=================== EPOCHS 28 ======================
+Epochs: 28 | loss_train: 3.524 ~ 5.084 BPC | loss_val: 3.519 ~ 5.076 BPC | elapsed: 1195.0
+=================== EPOCHS 29 ======================
+Epochs: 29 | loss_train: 3.530 ~ 5.093 BPC | loss_val: 3.506 ~ 5.058 BPC | elapsed: 1060.9
+=================== EPOCHS 30 ======================
+Epochs: 30 | loss_train: 3.520 ~ 5.079 BPC | loss_val: 3.521 ~ 5.079 BPC | elapsed: 1112.2
+=================== EPOCHS 31 ======================
+Epochs: 31 | loss_train: 3.508 ~ 5.061 BPC | loss_val: 3.507 ~ 5.059 BPC | elapsed: 1066.0
+=================== EPOCHS 32 ======================
+Epochs: 32 | loss_train: 3.526 ~ 5.087 BPC | loss_val: 3.520 ~ 5.078 BPC | elapsed: 1063.7
+=================== EPOCHS 33 ======================
+Epochs: 33 | loss_train: 3.529 ~ 5.091 BPC | loss_val: 3.507 ~ 5.060 BPC | elapsed: 1062.4
+=================== EPOCHS 34 ======================
+Epochs: 34 | loss_train: 3.513 ~ 5.069 BPC | loss_val: 3.521 ~ 5.080 BPC | elapsed: 1047.7
+=================== EPOCHS 35 ======================
+Epochs: 35 | loss_train: 3.515 ~ 5.071 BPC | loss_val: 3.511 ~ 5.065 BPC | elapsed: 1040.9
+=================== EPOCHS 36 ======================
+Epochs: 36 | loss_train: 3.531 ~ 5.094 BPC | loss_val: 3.521 ~ 5.079 BPC | elapsed: 1035.6
+=================== EPOCHS 37 ======================
+Epochs: 37 | loss_train: 3.523 ~ 5.083 BPC | loss_val: 3.508 ~ 5.061 BPC | elapsed: 1062.2
+=================== EPOCHS 38 ======================
+Epochs: 38 | loss_train: 3.507 ~ 5.059 BPC | loss_val: 3.518 ~ 5.075 BPC | elapsed: 1074.1
+=================== EPOCHS 39 ======================
+Epochs: 39 | loss_train: 3.524 ~ 5.084 BPC | loss_val: 3.509 ~ 5.062 BPC | elapsed: 1072.6
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': True, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': True, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': True, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': True, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+2024-09-17 08:37:03.711711
+2024-09-17 08:37:03.712320
+2024-09-17 08:37:03.713016
+2024-09-17 08:37:03.713488
+=================== EPOCHS 17 ======================
+Epochs: 17 | loss_train: 3.458 ~ 4.989 BPC | loss_val: 3.514 ~ 5.070 BPC | elapsed: 2236.3
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': True, 'pretrained_weight': '', 'full_eval_mode': True, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': True, 'pretrained_weight': '', 'full_eval_mode': True, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': True, 'pretrained_weight': '', 'full_eval_mode': True, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': True, 'pretrained_weight': '', 'full_eval_mode': True, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+2024-09-17 15:40:29.017638
+2024-09-17 15:40:29.018443
+2024-09-17 15:40:29.019154
+2024-09-17 15:40:29.019775
+Val: 5.074 BPC
+Test: 5.117 BPC
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': False, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+2024-09-17 15:43:43.356391
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': False, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+2024-09-17 15:43:43.383319
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': False, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+2024-09-17 15:43:43.399657
+Training Parameters:
+ {'batch_size': 48, 'batch_split': 2, 'nb_batches_per_iter': 1000, 'nb_iter': 80, 'checkpoint_path': '/cm/archive/stefannvkp/smoe_checkpoints/checkpoints/pretraining/enwik8/glam-m/glam-smoe-m.pt', 'resume': False, 'pretrained_weight': '', 'full_eval_mode': False, 'debug': False, 'show_sparse_w_stats': False, 'show_gate_w_stats': False}
+Models Parameters:
+ {'hidden_size': 352, 'inner_hidden_size': 352, 'nb_layers': 12, 'block_size': 512, 'nb_heads': 8, 'attn_span': 2048, 'dropout': 0.1, 'architecture': 'sgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsfsgsf', 'base_arch': 'glam', 'smoe_dropout': False, 'optimal_policy': False, 'load_balance': 0.01, 'moe_top_k': 2, 'freq': 0.03, 'freq_type': 'fix', 'alpha': 1.0, 'gate_name': 'smoe', 'act_experts': 'shuffle', 'g_blance': False, 'opt_blance': False, 'combine_gate': False, 'opt_loss': 'mse', 'gamma': 1.0, 'mu': 0.9, 'layer_n': 0.0, 'ssm': False, 'compute_load_balance': False, 'compute_rep_collapse': False, 'show_gate_W': False, 'mean_scale': False, 'root_invert': False, 'intra_layer': False, 'exp_distance': False, 'reduce_dim': False, 'return_fwd': False, 'return_2fwds': False, 'use_var': False, 'smoe_base': False, 'mad': False, 'mix_weights': False, 'skip_connect': False, 'temp_disp': False}
+2024-09-17 15:43:43.426386
+=================== EPOCHS 0 ======================
+Epochs: 0 | loss_train: 2.809 ~ 4.053 BPC | loss_val: 2.100 ~ 3.030 BPC | elapsed: 856.5
+=================== EPOCHS 1 ======================
+Epochs: 1 | loss_train: 1.676 ~ 2.418 BPC | loss_val: 1.445 ~ 2.085 BPC | elapsed: 852.4
+=================== EPOCHS 2 ======================
+Epochs: 2 | loss_train: 1.240 ~ 1.789 BPC | loss_val: 1.116 ~ 1.610 BPC | elapsed: 851.5
+=================== EPOCHS 3 ======================
+Epochs: 3 | loss_train: 1.085 ~ 1.565 BPC | loss_val: 1.038 ~ 1.497 BPC | elapsed: 849.5
+=================== EPOCHS 4 ======================
+Epochs: 4 | loss_train: 1.019 ~ 1.469 BPC | loss_val: 0.986 ~ 1.423 BPC | elapsed: 848.5
+=================== EPOCHS 5 ======================
+Epochs: 5 | loss_train: 0.986 ~ 1.423 BPC | loss_val: 0.962 ~ 1.388 BPC | elapsed: 848.7
+=================== EPOCHS 6 ======================
+Epochs: 6 | loss_train: 0.963 ~ 1.390 BPC | loss_val: 0.933 ~ 1.346 BPC | elapsed: 848.2
+=================== EPOCHS 7 ======================
+Epochs: 7 | loss_train: 0.934 ~ 1.348 BPC | loss_val: 0.924 ~ 1.334 BPC | elapsed: 848.4
+=================== EPOCHS 8 ======================
+Epochs: 8 | loss_train: 0.914 ~ 1.319 BPC | loss_val: 0.903 ~ 1.303 BPC | elapsed: 847.9
+=================== EPOCHS 9 ======================
+Epochs: 9 | loss_train: 0.913 ~ 1.317 BPC | loss_val: 0.898 ~ 1.295 BPC | elapsed: 848.8
+=================== EPOCHS 10 ======================
+Epochs: 10 | loss_train: 0.900 ~ 1.299 BPC | loss_val: 0.883 ~ 1.274 BPC | elapsed: 848.9
+=================== EPOCHS 11 ======================
+Epochs: 11 | loss_train: 0.884 ~ 1.276 BPC | loss_val: 0.882 ~ 1.272 BPC | elapsed: 846.7
+=================== EPOCHS 12 ======================
+Epochs: 12 | loss_train: 0.877 ~ 1.266 BPC | loss_val: 0.872 ~ 1.258 BPC | elapsed: 841.1
+=================== EPOCHS 13 ======================
+Epochs: 13 | loss_train: 1.323 ~ 1.908 BPC | loss_val: 3.522 ~ 5.081 BPC | elapsed: 840.9
+=================== EPOCHS 14 ======================
+Epochs: 14 | loss_train: 3.530 ~ 5.092 BPC | loss_val: 3.511 ~ 5.065 BPC | elapsed: 839.8
+=================== EPOCHS 15 ======================
+Epochs: 15 | loss_train: 3.530 ~ 5.092 BPC | loss_val: 3.521 ~ 5.079 BPC | elapsed: 839.0
+=================== EPOCHS 16 ======================
+Epochs: 16 | loss_train: 3.513 ~ 5.069 BPC | loss_val: 3.510 ~ 5.064 BPC | elapsed: 838.3
+=================== EPOCHS 17 ======================
+Epochs: 17 | loss_train: 3.516 ~ 5.072 BPC | loss_val: 3.520 ~ 5.078 BPC | elapsed: 838.5
+=================== EPOCHS 18 ======================
+Epochs: 18 | loss_train: 3.531 ~ 5.095 BPC | loss_val: 3.512 ~ 5.066 BPC | elapsed: 838.8
+=================== EPOCHS 19 ======================
+Epochs: 19 | loss_train: 3.523 ~ 5.083 BPC | loss_val: 3.522 ~ 5.081 BPC | elapsed: 838.7
+=================== EPOCHS 20 ======================
+Epochs: 20 | loss_train: 3.508 ~ 5.060 BPC | loss_val: 3.508 ~ 5.061 BPC | elapsed: 838.2
+=================== EPOCHS 21 ======================
+Epochs: 21 | loss_train: 3.524 ~ 5.084 BPC | loss_val: 3.519 ~ 5.076 BPC | elapsed: 839.1
+=================== EPOCHS 22 ======================
+Epochs: 22 | loss_train: 3.530 ~ 5.093 BPC | loss_val: 3.507 ~ 5.059 BPC | elapsed: 838.3
+=================== EPOCHS 23 ======================
+Epochs: 23 | loss_train: 3.521 ~ 5.079 BPC | loss_val: 3.520 ~ 5.079 BPC | elapsed: 838.2
+=================== EPOCHS 24 ======================
+Epochs: 24 | loss_train: 3.508 ~ 5.061 BPC | loss_val: 3.508 ~ 5.060 BPC | elapsed: 838.5
+=================== EPOCHS 25 ======================
+Epochs: 25 | loss_train: 3.526 ~ 5.087 BPC | loss_val: 3.519 ~ 5.077 BPC | elapsed: 839.2
+=================== EPOCHS 26 ======================
+Epochs: 26 | loss_train: 3.529 ~ 5.091 BPC | loss_val: 3.506 ~ 5.059 BPC | elapsed: 841.1
+=================== EPOCHS 27 ======================
+Epochs: 27 | loss_train: 3.513 ~ 5.069 BPC | loss_val: 3.521 ~ 5.080 BPC | elapsed: 840.6
+=================== EPOCHS 28 ======================
+Epochs: 28 | loss_train: 3.515 ~ 5.071 BPC | loss_val: 3.511 ~ 5.065 BPC | elapsed: 840.3
