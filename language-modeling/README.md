@@ -1,17 +1,7 @@
-# CompeteSMoE - Effective Training of Sparse Mixture of Experts via Competition
+***Thanks to the [CompeteSMoE](https://github.com/giangdip2410/CompeteSMoE) team for providing the basis of this repo*** 
+
+ CompeteSMoE - Effective Training of Sparse Mixture of Experts via Competition
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-
-Code for the paper [CompeteSMoE - Effective Training of Sparse Mixture of Experts via Competition](https://arxiv.org/abs/2402.02526)</br>
-
-Quang Pham, Giang Do, Huy Nguyen, TrungTin Nguyen, Chenghao Liu, Mina Sartipi, Binh T. Nguyen, Savitha Ramasamy, Xiaoli Li, Steven Hoi, Nhat Ho
-
-
-## Overview
-
-Sparse mixture of experts (SMoE) offers an appealing solution to scale up the model complexity beyond the mean of increasing the network's depth or width. However, effective training of SMoE has proven to be challenging due to the representation collapse issue, which causes parameter redundancy and limited representation potentials. In this work, we propose a competition mechanism to address this fundamental challenge of representation collapse. By routing inputs only to experts with the highest neural response, we show that, under mild assumptions, competition enjoys the same convergence rate as the optimal estimator. We further propose CompeteSMoE, an effective and efficient algorithm to train large language models by deploying a simple router that predicts the competition outcomes. Consequently, CompeteSMoE enjoys strong performance gains from the competition routing policy while having low computation overheads. Our extensive empirical evaluations on two transformer architectures and a wide range of tasks demonstrate the efficacy, robustness, and scalability of CompeteSMoE compared to state-of-the-art SMoE strategies.
-
-![](Figs/framework.png)
-
 
 ## Prerequisites
 
