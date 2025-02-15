@@ -7,3 +7,5 @@ See the paper:
 - [Image classification with the Swin Transformer backbone](image-classification/)
 - [Language Modeling with Switch Transformer and Generalist Language Model backbones](language-modeling/)
 - [Image classification with the Soft Mixture of Experts (SoftMoE) backbone](SoftMoE)
+
+Check the README in each subdirectory for instructions specific to that set of experiments.
