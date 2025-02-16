@@ -1,15 +1,9 @@
 ***Thanks to the [CompeteSMoE](https://github.com/giangdip2410/CompeteSMoE) team for providing the basis of this repo*** 
 
- CompeteSMoE - Effective Training of Sparse Mixture of Experts via Competition
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-
 ## Prerequisites
 
 - pytorch
 - fastmoe: https://github.com/laekov/fastmoe
-
-## Usage
-
 
 ##### Prepare Enwik8, Text8 and Wikitext-103 Datasets: 
 
@@ -104,20 +98,4 @@ bash scripts/finetuning/sst2/transformers/small/competesmoe-s.sh
 bash scripts/finetuning/sst5/transformers/small/competesmoe-s.sh 
 ```
 
-## Acknowledgement
-
-Our implementation is based on [fastmoe repo](https://github.com/laekov/fastmoe), [huggingface repo](https://github.com/huggingface/transformers) and [Sandwich Transformer](https://github.com/ofirpress/sandwich_transformer).
-
-## Citation
-
-```
-@misc{pham2024competesmoe,
-      title={CompeteSMoE -- Effective Training of Sparse Mixture of Experts via Competition}, 
-      author={Quang Pham and Giang Do and Huy Nguyen and TrungTin Nguyen and Chenghao Liu and Mina Sartipi and Binh T. Nguyen and Savitha Ramasamy and Xiaoli Li and Steven Hoi and Nhat Ho},
-      year={2024},
-      eprint={2402.02526},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
-}
-```
 
