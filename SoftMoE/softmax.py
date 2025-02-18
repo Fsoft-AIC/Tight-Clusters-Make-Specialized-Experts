@@ -312,6 +312,7 @@ class SoftMoEVisionTransformer(nn.Module):
         num_experts: int = 128,
         slots_per_expert: int = 1,
         moe_layer_index: int | list[int] = 6,
+        acmoe_layer_index: int | list[int] = [],
         img_size: int | tuple[int, int] = 224,
         patch_size: int | tuple[int, int] = 16,
         in_chans: int = 3,
@@ -342,6 +343,9 @@ class SoftMoEVisionTransformer(nn.Module):
         mlp_layer: Callable = Mlp,
         pretrained_cfg=None,
         pretrained_cfg_overlay=None,
+        mix_weights = False,
+        mad = False,
+        mix_k = 8,
     ):
         """
         Args:
@@ -431,9 +435,22 @@ class SoftMoEVisionTransformer(nn.Module):
             slots_per_expert=self.slots_per_expert,
         )
 
+        acmoe_mlp_layer = partial(SoftMoELayerWrapper,
+            layer=mlp_layer,
+            dim=embed_dim,
+            num_experts=self.num_experts,
+            slots_per_expert=self.slots_per_expert,
+            acmoe = True,
+            return_topk = True,
+            mad = mad,
+            mix_weights = mix_weights,
+            mix_k = mix_k)
+
         # Create a list where each index is the mlp layer class to
         # use at that depth
         self.moe_layer_index = moe_layer_index
+        self.acmoe_layer_index = acmoe_layer_index
+        #breakpoint()
         if isinstance(moe_layer_index, list):
             # Only the specified layers in moe_layer_index
             assert len(moe_layer_index) > 0
@@ -443,12 +460,16 @@ class SoftMoEVisionTransformer(nn.Module):
                 moe_mlp_layer if i in moe_layer_index else mlp_layer
                 for i in range(depth)
             ]
+
+            if acmoe_layer_index: # swap in acmoe layers at chosen indices
+                for i in acmoe_layer_index:
+                    mlp_layers_list[i] = acmoe_mlp_layer
         else:
             # All layers including and after moe_layer_index
             assert 0 <= moe_layer_index < depth
 
             mlp_layers_list = [
-                moe_mlp_layer if i >= moe_layer_index else mlp_layer
+                moe_mlp_layer if i in moe_layer_index else mlp_layer
                 for i in range(depth)
             ]
 
@@ -469,6 +490,8 @@ class SoftMoEVisionTransformer(nn.Module):
                     norm_layer=norm_layer,
                     act_layer=act_layer,
                     mlp_layer=mlp_layers_list[i],
+                    use_acmoe = True if i in acmoe_layer_index else False,
+                    is_moe = True if i in moe_layer_index else False
                 )
                 for i in range(depth)
             ]
@@ -553,6 +576,8 @@ class SoftMoEVisionTransformer(nn.Module):
             x = checkpoint_seq(self.blocks, x)
         else:
             x = self.blocks(x)
+            if type(x) is tuple:
+                x, (mix_weights, cluster_assignments) = x
         x = self.norm(x)
         return x
 

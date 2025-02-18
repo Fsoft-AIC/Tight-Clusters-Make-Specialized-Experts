@@ -18,6 +18,14 @@ from timm.data import Mixup
 from timm.utils import accuracy, ModelEma
 
 from losses import DistillationLoss
+from spsa import spsa
+# from fast_gradient_method import fast_gradient_method
+# from projected_gradient_descent import projected_gradient_descent
+
+from cleverhans.torch.attacks.fast_gradient_method import fast_gradient_method
+from cleverhans.torch.attacks.projected_gradient_descent import projected_gradient_descent
+
+
 import utils
 import pdb
 
@@ -25,7 +33,7 @@ def train_one_epoch(model: torch.nn.Module, criterion: DistillationLoss,
                     data_loader: Iterable, optimizer: torch.optim.Optimizer,
                     device: torch.device, epoch: int, loss_scaler, max_norm: float = 0,
                     model_ema: Optional[ModelEma] = None, mixup_fn: Optional[Mixup] = None,
-                    set_training_mode=True,architecture=""):
+                    set_training_mode=True,architecture="", use_wandb = False, debug = False):
     # put our model in training mode... so that drop out and batch normalisation does not affect it
     model.train(set_training_mode)
     metric_logger = utils.MetricLogger(delimiter="  ")
@@ -86,16 +94,20 @@ def train_one_epoch(model: torch.nn.Module, criterion: DistillationLoss,
         metric_logger.update(loss=loss_value)
         metric_logger.update(lr=optimizer.param_groups[0]["lr"])
     # gather the stats from all processes
+
+        if debug:
+            break
     metric_logger.synchronize_between_processes()
     print("Averaged stats:", metric_logger)
     for k, meter in metric_logger.meters.items():
-        wandb.log({k: meter.global_avg, 'epoch': epoch})
-   
+        if use_wandb:
+            wandb.log({k: meter.global_avg, 'epoch': epoch})
+    
     return {k: meter.global_avg for k, meter in metric_logger.meters.items()}
 
 # evaluate on 1000 images in imagenet/val folder
 @torch.no_grad()
-def evaluate(data_loader, model, device, attn_only=False, batch_limit=0 ,epoch=0):
+def evaluate(data_loader, model, device, attn_only=False, batch_limit=0 ,epoch=0, use_wandb = False, debug = False, attack = 'none', eps = 1):
     criterion = torch.nn.CrossEntropyLoss()
 
     metric_logger = utils.MetricLogger(delimiter="  ")
@@ -105,10 +117,27 @@ def evaluate(data_loader, model, device, attn_only=False, batch_limit=0 ,epoch=0
         batch_limit = 0
     attn = []
     pi = []
+
+    if attack == 'fgm' or attack == 'pgd':
+        print(f'Using {attack} with budget {eps} / 255')
+        eps = eps / 255
+    if attack == 'spsa':
+        print(f'Using {attack} with budget {eps} / 10')
+        eps = eps / 10
+
+    
     for i, (images, target) in enumerate(metric_logger.log_every(data_loader, 10, header)):
         images = images.to(device, non_blocking=True)
         target = target.to(device, non_blocking=True)
 
+        if attack != 'none':
+            if attack == 'fgm':
+                images = fast_gradient_method(model, images, eps, np.inf)
+            elif attack == 'pgd':
+                images = projected_gradient_descent(model, images, eps, 0.15 * eps, 20, np.inf)
+            elif attack == 'spsa':
+                images = spsa(model, images, eps, 20)
+        
 
         with torch.cuda.amp.autocast():
             if attn_only:
@@ -130,12 +159,16 @@ def evaluate(data_loader, model, device, attn_only=False, batch_limit=0 ,epoch=0
         metric_logger.meters['acc5'].update(acc5.item(), n=batch_size)
         r = {k: meter.global_avg for k, meter in metric_logger.meters.items()}
         # wandb.log(r)
+
+        if debug:
+            break
     # gather the stats from all processes
     metric_logger.synchronize_between_processes()
     print('* Acc@1 {top1.global_avg:.3f} Acc@5 {top5.global_avg:.3f} loss {losses.global_avg:.3f}'
           .format(top1=metric_logger.acc1, top5=metric_logger.acc5, losses=metric_logger.loss))
     for k, meter in metric_logger.meters.items():
-        wandb.log({f'test_{k}': meter.global_avg , 'epoch':epoch})
+        if use_wandb:
+            wandb.log({f'test_{k}': meter.global_avg , 'epoch':epoch})
 
     if attn_only:
         return r, (attn, pi)

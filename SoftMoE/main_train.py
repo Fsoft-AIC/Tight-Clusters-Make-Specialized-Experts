@@ -177,6 +177,21 @@ def get_args_parser():
     
     # Wandb API key
     parser.add_argument('--API_Key', default='', help='API key for wandb')
+    parser.add_argument('--use-wandb', action = 'store_true')
+    parser.add_argument('--job-name', type = str, default = '')
+    parser.add_argument('--debug', action = 'store_true')
+
+    parser.add_argument('--moe-layer-index', nargs = '+', type = int, default = [6,7,8,9,10,11] )
+    parser.add_argument('--acmoe-layer-index', nargs = '+', type = int, default = [])
+    parser.add_argument('--mad', action = 'store_true')
+    parser.add_argument('--mix-weights', action = 'store_true')
+    parser.add_argument('--show-gate-w-stats', action = 'store_true')
+    parser.add_argument('--mix-k', type = int, default = 8)
+    parser.add_argument('--attack', type = str, default = 'none')
+    parser.add_argument('--eps', type = int, default = 1)
+
+    parser.add_argument('--compute-router-stability', action = 'store_true')
+
 
     return parser
 
@@ -192,6 +207,14 @@ def main(args):
     name = f'{args.model}' + args.output_dir.split('/')[-1]
 
     utils.init_distributed_mode(args)
+    if args.debug:
+        print('running in debug mode. No wandb, no saving')
+        args.batch_size = 12
+        args.use_wandb = False
+        args.output_dir = ''
+
+    if args.attack != 'none':
+        assert args.eval, 'attack is on, need eval on as well'
 
     print(args)
 
@@ -263,14 +286,31 @@ def main(args):
             label_smoothing=args.smoothing, num_classes=args.nb_classes)
 
     print(f"Creating model: {args.model}")
-    model = create_model(
-        args.model,
-        pretrained=False,
-        num_classes=args.nb_classes,
-        drop_rate=args.drop,
-        drop_path_rate=args.drop_path,
-        drop_block_rate=None,
-    )
+    if 'acmoe' in args.model:
+        model = create_model(
+            args.model,
+            pretrained=False,
+            num_classes=args.nb_classes,
+            drop_rate=args.drop,
+            drop_path_rate=args.drop_path,
+            drop_block_rate=None,
+            moe_layer_index = args.moe_layer_index,
+            acmoe_layer_index = args.acmoe_layer_index,
+            mad = args.mad,
+            mix_weights = args.mix_weights,
+            mix_k = args.mix_k
+        )
+    else:
+        model = create_model(
+            args.model,
+            pretrained=False,
+            num_classes=args.nb_classes,
+            drop_rate=args.drop,
+            drop_path_rate=args.drop_path,
+            drop_block_rate=None,
+            moe_layer_index = args.moe_layer_index
+        )
+
 
     if args.finetune:
         if args.finetune.startswith('https'):
@@ -390,8 +430,18 @@ def main(args):
                 loss_scaler.load_state_dict(checkpoint['scaler'])
 
     if args.eval:
-        test_stats = evaluate(data_loader_val, model, device)
+        test_stats = evaluate(data_loader_val, model, device, attack = args.attack, eps = args.eps)
         print(f"Accuracy of the network on the {len(dataset_val)} test images: {test_stats['acc1']:.1f}%")
+
+        if args.compute_router_stability:
+            print('computing router stability...')
+            mod = model.module
+            for idx, block in enumerate(mod.blocks.children()):
+                if idx in args.moe_layer_index:
+                    ith_average_stab = block.mlp.router_stability
+                    print(f'Layer: {idx} | average router stability: {ith_average_stab:.3f}')
+
+
         return
     
 
@@ -400,13 +450,12 @@ def main(args):
         # checkpoint = torch.load(model_path)
         # model_without_ddp.load_state_dict(checkpoint['model'])
     
-    wandb.init(
     # set the wandb project where this run will be logged
-    project="Rebuttal_softmoe",
-    
-    # track hyperparameters and run metadata
-    config=args)
-    wandb.run.name = "Baseline"
+    if args.use_wandb:
+        wandb.init(
+        project="softmoe-acmoe",
+        config=args)
+        wandb.run.name = args.job_name
 
     print(f"Start training for {args.epochs} epochs from {args.start_epoch}")
     start_time = time.time()
@@ -420,13 +469,15 @@ def main(args):
             optimizer, device, epoch, loss_scaler,
             args.clip_grad, model_ema, mixup_fn,
             set_training_mode=args.finetune == '', # keep in eval mode during finetuning
-            architecture=args.model
+            architecture=args.model,
+            use_wandb = args.use_wandb,
+            debug = args.debug
         )
 
         lr_scheduler.step(epoch)
 
         if args.output_dir:
-            checkpoint_paths = [output_dir / f'{current_time}_{args.model}_checkpoint.pth']
+            checkpoint_paths = [output_dir / f'{args.job_name}_checkpoint.pth']
             for checkpoint_path in checkpoint_paths:
                 utils.save_on_master({
                     'model': model_without_ddp.state_dict(),
@@ -438,10 +489,20 @@ def main(args):
                     'args': args,
                 }, checkpoint_path)
 
-        test_stats = evaluate(data_loader_val, model, device, epoch=epoch)
+        test_stats = evaluate(data_loader_val, model, device, epoch=epoch, use_wandb = args.use_wandb, debug = args.debug)
         print(f"Accuracy of the network on the {len(dataset_val)} test images: {test_stats['acc1']:.1f}%")
         max_accuracy = max(max_accuracy, test_stats["acc1"])
         print(f'Max accuracy: {max_accuracy:.2f}%')
+
+        if args.show_gate_w_stats:
+            mod = model.module
+            for idx, block in enumerate(mod.blocks.children()):
+                if idx in args.acmoe_layer_index:
+                    Wmin, Wmax, Wmean, Wstd, clamproof = block.mlp.W
+                    
+                    print('-----------Gate Weight Statistics ------------')
+                    print(f'Min: {Wmin} | Max: {Wmax} | Mean: {Wmean} | std: {Wstd} | Clamp Roof: {clamproof}')
+ 
 
         log_stats = {**{f'train_{k}': v for k, v in train_stats.items()},
                      **{f'test_{k}': v for k, v in test_stats.items()},
@@ -463,14 +524,15 @@ if __name__ == '__main__':
     args = parser.parse_args()
     if args.output_dir:
         Path(args.output_dir).mkdir(parents=True, exist_ok=True)
-    os.environ["WANDB_API_KEY"]=args.API_Key
-    try:
-        main(args)
-    except Exception as Argument:
-        print("error")
-     # creating/opening a file
-        f = open("error.txt", "a")
-        # writing in the file
-        f.write(str(Argument))
-        # closing the file
-        f.close() 
+    os.environ["WANDB_API_KEY"]= 'f9b91afe90c0f06aa89d2a428bd46dac42640bff'
+    main(args)
+    # try:
+    #     main(args)
+    # except Exception as Argument:
+    #     print("error")
+    #  # creating/opening a file
+    #     f = open("error.txt", "a")
+    #     # writing in the file
+    #     f.write(str(Argument))
+    #     # closing the file
+    #     f.close() 

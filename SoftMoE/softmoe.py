@@ -8,7 +8,8 @@ from typing import Any, Callable, Dict, Optional, Set, Tuple, Type, Union, List
 from timm.layers.helpers import to_2tuple
 
 
-def softmax(x: torch.Tensor, dim: int | tuple[int, ...]) -> torch.Tensor:
+def softmax(x: torch.Tensor, dim: int | tuple[int, ...])  -> torch.Tensor:
+# def softmax(x: torch.Tensor, dim: Union[int, Tuple[int, ...]])  -> torch.Tensor: # for python <3.10
     """
     Compute the softmax along the specified dimensions.
     This function adds the option to specify multiple dimensions
@@ -41,6 +42,11 @@ class SoftMoELayerWrapper(nn.Module):
         slots_per_expert: int,
         layer: Callable,
         normalize: bool = True,
+        acmoe = False,
+        return_topk = False,
+        mad = True,
+        mix_weights = False,
+        mix_k = 8,
         **layer_kwargs,
     ) -> None:
         """
@@ -73,7 +79,17 @@ class SoftMoELayerWrapper(nn.Module):
             [layer(**layer_kwargs) for _ in range(num_experts)]
         )
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        self.acmoe = acmoe
+        self.return_topk = return_topk
+        self.mad = mad
+        self.mix_weights = mix_weights
+
+        self.is_moe = True
+        self.mix_k = mix_k
+
+        self.router_stability = 0.0
+
+    def forward(self, x: torch.Tensor, cluster_assignments = None, mixing_weights = None) -> torch.Tensor:
         """
         Forward pass through the Soft-MoE layer (algorithm 1 from paper).
 
@@ -89,7 +105,9 @@ class SoftMoELayerWrapper(nn.Module):
         assert (
             len(x.shape) == 3
         ), f"Input expected to have 3 dimensions but has {len(x.shape)}"
-
+        
+        b, m, d = x.shape
+        
         phi = self.phi
 
         # Normalize input and phi
@@ -98,9 +116,55 @@ class SoftMoELayerWrapper(nn.Module):
             phi = self.scale * F.normalize(phi, dim=0)  # [d, n, p]
 
         # Compute dispatch and combine weights
+        #breakpoint()
+        if self.acmoe:
+            M = self.compute_acmoe(x, cluster_assignments = cluster_assignments, mixing_weights=mixing_weights)
+            x = x.view(-1, d) * M
+            x = x.view(b,m,d)
+        
+        # elif self.expert_acmoe:
+        #     M = self.expert_M # [n,d]
+        #     phi = M.transpose(-2,-1).unsqueeze() * phi # [d,n,p]
+            
+        
         logits = torch.einsum("bmd,dnp->bmnp", x, phi)
+
+        #### get top cluster assignments ###
+        b, m, n, p = logits.shape
+        expert_affinities = logits.view(b, m, n*p)
+
+        #breakpoint()
+        ### compute router stability ###
+        
+        topk_previous = cluster_assignments # store previous assignments
+        ### compute router stability ###
+
+        mixing_weights, slot_assignments = torch.topk(expert_affinities, dim = 2, k = self.mix_k) # top k over 'np' dimension
+        cluster_assignments = slot_assignments // p # each expert takes p slots, recover the ith expert corresponding to the slot idx
+        ###
+
+        ### start compute router stability ###
+        
+        if topk_previous is not None:
+            topk_previous_expanded = topk_previous[:,0].unsqueeze(0)  # Shape: (1, n)
+            topk_previous_t_expanded = topk_previous[:,0].unsqueeze(1)  # Shape: (n, 1)
+
+            sim_previous = (topk_previous_expanded == topk_previous_t_expanded).int()  # Shape: (n, n), with 1 where labels match and 0 otherwise
+
+            topk_expanded = cluster_assignments[:,0].unsqueeze(0)  # Shape: (1, n)
+            topk_t_expanded = cluster_assignments[:,0].unsqueeze(1)  # Shape: (n, 1)
+
+            sim_here = (topk_expanded == topk_t_expanded).int()  # Shape: (n, n), with 1 where labels match and 0 otherwise
+
+
+            self.router_stability = 0.8*self.router_stability + 0.2*torch.mean((sim_previous != sim_here).float())
+        ### end compute router stability ###
+
         d = softmax(logits, dim=1)
         c = softmax(logits, dim=(2, 3))
+
+        # if self.save_expert_acmoe:
+        #     self.compute_exp_acmoe(x, d)
 
         # Compute input slots as weighted average of input tokens using dispatch weights
         xs = torch.einsum("bmd,bmnp->bnpd", x, d)
@@ -113,7 +177,162 @@ class SoftMoELayerWrapper(nn.Module):
         # Compute output tokens as weighted average of output slots using combine weights
         y = torch.einsum("bnpd,bmnp->bmd", ys, c)
 
-        return y
+        return y, (mixing_weights, cluster_assignments)
+        
+        #return y
+
+    def compute_acmoe(self, input, cluster_assignments, mixing_weights = None, reserve_dims=1):
+        # input : [b,m,d]
+        # cluster_assignments : [b,m,topk]
+        #breakpoint()
+        original_shape, original_dtype  = input.shape, input.dtype
+
+        tokens = input.reshape(-1, original_shape[-reserve_dims:].numel())
+        top_k = cluster_assignments.shape[2]
+
+        cluster_assignments = cluster_assignments.reshape(-1, top_k).squeeze()
+
+        with torch.no_grad():
+            tokens = tokens.detach()
+            cluster_assignments = cluster_assignments.detach()
+            
+            if top_k > 1:
+                top_cluster_assignments = cluster_assignments[:,0] # take only top cluster assignment as label
+            else:
+                top_cluster_assignments = cluster_assignments
+            
+            n, d = tokens.shape
+            
+            k = cluster_assignments.max().item() + 1
+
+            #tokens = tokens / (torch.std(tokens, dim = 0) + 1e-4) # divide by featurewise stds
+            
+            if self.mad: # mean absolute deviation
+                mean_dimwise_clusterwise = torch.zeros((k,d), device = tokens.device).index_reduce(0, top_cluster_assignments, tokens, 'mean', include_self=False)
+                centered_tokens = torch.abs(tokens - mean_dimwise_clusterwise[top_cluster_assignments, :]) # abs of each token minus its cluster mean
+                W_mad = torch.zeros((k,d), device = tokens.device).index_reduce(0, top_cluster_assignments, centered_tokens, 'mean', include_self = False)
+                
+                # invert
+                W = 1 / (W_mad + 0.35) # previous eps=0.35
+
+                # clip thresholding
+                W_mean = W.mean()
+                top_clamp = 5* W_mean
+                #bottom_clamp = 0 * W_mean
+                
+                # top_clamp = 1.25 * W_mean
+                # bottom_clamp = (1/1.25) * W_mean
+                
+                W = torch.clamp(W,  max = top_clamp)
+
+                # alpha = 0.1
+                # W = alpha*torch.ones_like(W) + (1-alpha)*W
+
+                #alpha = 0 # remove this once running a uniform smoothing
+                # if self.epoch >= 45:
+                #     # begin smoothing to uniform distribution
+                #     alpha = self.smooth_dist[self.alpha_counter]
+                #     W = alpha*torch.ones_like(W) + (1-alpha)*W
+                #     #print(alpha)
+                
+                # weight scale
+                #W = W/ W.mean(dim = 0) # dimwise meanscaling
+                #print('cosa here')
+                # W = W / W.mean(dim = 1).unsqueeze(1) # clusterwise meanscaling
+                W = W / W.mean() # global mean feature scaling
+                #W = W / W.max(dim=0)[0]
+                
+            else:
+                mean_dimwise_clusterwise = torch.zeros((k,d), device = tokens.device).index_reduce(0, top_cluster_assignments, tokens, 'mean', include_self=False)
+                mean_square_dimwise_clusterwise = torch.zeros((k,d), device = tokens.device).index_reduce(0, top_cluster_assignments, torch.square(tokens), 'mean', include_self=False)
+                variance_dimwise_clusterwise = mean_square_dimwise_clusterwise - mean_dimwise_clusterwise**2
+                W = 1 / ((variance_dimwise_clusterwise) + 1e-4) # [k,d] cluster-feature weights 
+                 # clip thresholding
+                W_mean = W.mean()
+                clip_threshold = 10 * W_mean
+                W = torch.clamp(W, max = clip_threshold)
+                
+                # weight scale
+                #W = W/ W.mean(dim = 0) # dimwise meanscaling
+                #print('cosa here')
+                # W = W / W.mean(dim = 1).unsqueeze(1) # clusterwise meanscaling
+                W = W / W_mean # global mean feature scaling
+
+                #print('here var')
+            self.W = W.min(), W.max(), W.mean(), W.std(), top_clamp
+            # print('here cosa')
+
+            if self.mix_weights:
+                assert mixing_weights is not None
+                assert top_k == self.mix_k
+                #breakpoint()
+                # mixing_weights: [b,m,top_k]
+                mixing_weights = mixing_weights.view(-1, top_k) #[b*m, top_k]
+                mixing_weights = torch.softmax(mixing_weights, dim = 1)
+                assert torch.mean(torch.sum(mixing_weights, dim = 1)) == 1
+                
+                # Create an index tensor of shape (n, top_k) based on the labels
+                index = cluster_assignments.view(n, top_k, 1).expand(n, top_k, d)
+                # Add a new dimension to the weights tensor to match the index tensor
+                W = W.unsqueeze(0).expand(n, k, d)
+                # Gather the corresponding weights for each label. 
+                W = torch.gather(W, 1, index) # [n, top_k, d]
+
+                # mix weights according to the gate top k val
+                mixing_weights = mixing_weights.view(n, top_k, 1)
+                W = (W*mixing_weights).sum(dim = 1) # n x d
+                
+            else:
+                # broadcast up to shape [n, d] which rows arranged by corresponding cluster assignments of n
+                W = W[top_cluster_assignments, :] # rescale via MAPD - MAD relationship
+                
+        return W
+
+    def compute_exp_acmoe(self, input, dispatch_weights, mixing_weights = None, reserve_dims=1):
+        # input : [b,m,d]
+        # dispatch_weights : [b,m,n]
+        #breakpoint()
+        b,m,d = input.shape
+        n = dispatch_weights.shape[2]
+
+        input = input.unsqueeze(2) # [b,m,1,d]
+        input = input.expand(-1,-1,n,-1) # [b,m,n,d]
+
+        with torch.no_grad():
+            input = input.detach()
+            dispatch_weights = dispatch_weights.detach()
+
+            input = input * dispatch_weights.unsqueeze() # each token weighted by its dispatch weight
+
+            input = input.permute(2,0,1,3) # [n, b, m, d]
+            input = input.view(n, b*m, d) # b*m d-dimensional inputs per expert
+
+            expert_means = torch.mean(input, dim =1, keepdim = True)
+            input_demean = torch.abs(input - expert_means)
+            W_mad = torch.mean(input_demean, dim = 1) # [n,d]
+
+            W = 1 / (W_mad + 1e-4)
+
+            # clip thresholding
+            W_mean = W.mean()
+            top_clamp = 5* W_mean
+            #bottom_clamp = 0 * W_mean
+            
+            W = torch.clamp(W,  max = top_clamp)
+
+            # weight scale
+            #W = W/ W.mean(dim = 0) # dimwise meanscaling
+            #print('cosa here')
+            # W = W / W.mean(dim = 1).unsqueeze(1) # clusterwise meanscaling
+            W = W / W.mean() # global mean feature scaling
+
+            self.W = W.min(), W.max(), W.mean(), W.std(), top_clamp
+
+            self.expert_M = W
+        
+        return 
+
+          
 
 class LayerScale(nn.Module):
     def __init__(
@@ -215,6 +434,8 @@ class Block(nn.Module):
             act_layer: nn.Module = nn.GELU,
             norm_layer: nn.Module = nn.LayerNorm,
             mlp_layer: nn.Module = Mlp,
+            is_moe = False,
+            use_acmoe = False
     ) -> None:
         super().__init__()
         self.norm1 = norm_layer(dim)
@@ -240,7 +461,34 @@ class Block(nn.Module):
         self.ls2 = LayerScale(dim, init_values=init_values) if init_values else nn.Identity()
         self.drop_path2 = DropPath(drop_path) if drop_path > 0. else nn.Identity()
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        x = x + self.drop_path1(self.ls1(self.attn(self.norm1(x))))
-        x = x + self.drop_path2(self.ls2(self.mlp(self.norm2(x))))
-        return x
+        self.is_moe = is_moe
+        self.use_acmoe = use_acmoe
+
+    def forward(self, x):
+        if type(x) is tuple:
+            x, (mixing_weights, cluster_assignments) = x
+        
+        x_attn_out = x + self.drop_path1(self.ls1(self.attn(self.norm1(x))))
+        #breakpoint()
+        if self.is_moe: # acmoe
+            if self.use_acmoe:
+                assert cluster_assignments is not None
+                x_moe_out, (mixing_weights, cluster_assignments) = self.mlp(self.norm2(x_attn_out), 
+                                                                            cluster_assignments = cluster_assignments, mixing_weights = mixing_weights)
+            else:
+                ### temporary patch over for computing router stability in baseline model, take out for final build
+                try:
+                    x_moe_out, (mixing_weights, cluster_assignments) = self.mlp(self.norm2(x_attn_out), 
+                                                                            cluster_assignments = cluster_assignments, mixing_weights = mixing_weights)
+                except:
+                    x_moe_out, (mixing_weights, cluster_assignments) = self.mlp(self.norm2(x_attn_out)) # should just be this line
+                #### 
+        
+            x_out = x_attn_out + self.drop_path2(self.ls2(x_moe_out))
+
+            return (x_out, (mixing_weights, cluster_assignments))
+        
+        else: # regular MLP
+            x_out = x_attn_out + self.drop_path2(self.ls2(self.mlp(self.norm2(x_attn_out))))
+        
+            return x_out

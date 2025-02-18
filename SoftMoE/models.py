@@ -60,13 +60,13 @@ def deit_tiny_patch16_224(pretrained=True, **kwargs):
     from softmax import VisionTransformer
     model = VisionTransformer(
         patch_size=16, embed_dim=192, depth=12, num_heads=3, mlp_ratio=4, qkv_bias=True,
-        norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs) # Tan's NOTE: in the original code, num_heads = 3 here
+        norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs) #  NOTE: in the original code, num_heads = 3 here
     model.default_cfg = _cfg()
     return model
 
 @register_model
 def soft_moe_vit_tiny(pretrained=False,
-    num_experts=128, slots_per_expert=1, moe_layer_index=6, **kwargs):
+    num_experts=128, slots_per_expert=1, moe_layer_index=[6,7,8,9,10,11], **kwargs):
     from softmax import SoftMoEVisionTransformer
     model = SoftMoEVisionTransformer(
         num_experts=num_experts,
@@ -79,18 +79,56 @@ def soft_moe_vit_tiny(pretrained=False,
     )
     return model
 
-# def soft_moe_vit_small(
-#     num_experts=128, slots_per_expert=1, moe_layer_index=6, **kwargs
-# ) -> SoftMoEVisionTransformer:
-#     return SoftMoEVisionTransformer(
-#         num_experts=num_experts,
-#         slots_per_expert=slots_per_expert,
-#         moe_layer_index=moe_layer_index,
-#         embed_dim=384,
-#         depth=12,
-#         num_heads=6,
-#         **kwargs,
-#     )
+@register_model
+def soft_acmoe_vit_tiny(pretrained=False,
+    num_experts=128, slots_per_expert=1, moe_layer_index=[6,7,8,9,10,11], acmoe_layer_index = [7,8,9,10,11], mad = True, mix_weights = True, mix_k = 8, **kwargs):
+    from softmax import SoftMoEVisionTransformer
+    model = SoftMoEVisionTransformer(
+        num_experts=num_experts,
+        slots_per_expert=slots_per_expert,
+        moe_layer_index=moe_layer_index,
+        acmoe_layer_index = acmoe_layer_index,
+        mad = mad,
+        mix_weights= mix_weights,
+        mix_k = mix_k,
+        embed_dim=192,
+        depth=12,
+        num_heads=3,
+        **kwargs,
+    )
+    return model
+
+def soft_moe_vit_small(
+    num_experts=128, slots_per_expert=1, moe_layer_index=[6,7,8,9,10,11], **kwargs):
+    from softmax import SoftMoEVisionTransformer
+    return SoftMoEVisionTransformer(
+        num_experts=num_experts,
+        slots_per_expert=slots_per_expert,
+        moe_layer_index=moe_layer_index,
+        embed_dim=384,
+        depth=12,
+        num_heads=6,
+        **kwargs,
+    )
+
+@register_model
+def soft_acmoe_vit_small(pretrained=False,
+    num_experts=128, slots_per_expert=1, moe_layer_index=[6,7,8,9,10,11], acmoe_layer_index = [7,8,9,10,11], mad = True, mix_weights = True, mix_k = 8, **kwargs):
+    from softmax import SoftMoEVisionTransformer
+    model = SoftMoEVisionTransformer(
+        num_experts=num_experts,
+        slots_per_expert=slots_per_expert,
+        moe_layer_index=moe_layer_index,
+        acmoe_layer_index = acmoe_layer_index,
+        mad = mad,
+        mix_weights= mix_weights,
+        mix_k = mix_k,
+        embed_dim=384,
+        depth=12,
+        num_heads=6,
+        **kwargs,
+    )
+    return model
 
 
 # def soft_moe_vit_base(
